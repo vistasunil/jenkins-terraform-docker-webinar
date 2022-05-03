@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        node {
+            label 'slave2'
+        }
+    }
     parameters {
     	string(name: 'serverIP', defaultValue: 'None', description: 'Enter target Host IP ')
 	string(name: 'targetHost', defaultValue: 'None', description: 'Enter target host for deployment ')
