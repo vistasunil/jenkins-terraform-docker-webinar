@@ -39,7 +39,7 @@ pipeline {
 	}
 	stage('Test the website') {
 		steps {
-			sh 'curl http://${targetHost}:81/devopsIQ"'
+			sh 'curl "http://${targetHost}:81/devopsIQ"'
 		}
 	}
     }
