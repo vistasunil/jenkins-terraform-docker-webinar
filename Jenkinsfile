@@ -10,6 +10,9 @@ pipeline {
 	string(name: 'dockerUser', defaultValue: 'None', description: 'Enter Docker user name ')
 	password(name: 'dockerPass', description: 'Enter docker login password ')	    
     }
+    environment {
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+    }
     stages {
         stage('SCM checkout'){
         	steps {
@@ -28,7 +31,7 @@ pipeline {
 	}
 	stage('Docker Push'){
 		steps {
-			sh "sudo docker login --username ${dockerUser} --password ${dockerPass}"
+			sh "echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login --username ${dockerUser} --password-stdin"
 			sh "sudo docker push ${dockerUser}/devopsdemo:latest"
 		}
 	}
