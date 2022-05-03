@@ -42,19 +42,19 @@ pipeline {
 	}
 	stage('Test the website') {
 		steps {
-			script{
-				ports.each{port->
-					sh 'curl -I "http://${serverIP}:$port"'
-				}
-			}
 			test_web(${ports},serverIP)
 		}
 	}
     }
 }
 
-def test_web(port,serverIP) {
-    for (int i = 0; i < list.size(); i++) {
-        sh 'curl -I "http://${serverIP}:${port[i]}"'
+def test_web(ports,serverIP) {
+    script {
+     ports.each { entry ->                        
+	    sh "curl -I http://${serverIP}:${entry}"
+     }
+    //for (int i = 0; i < port.size(); i++) {
+    //    sh "curl -I http://34.125.198.147:${port[i]}"
+    //}
     }
 }
