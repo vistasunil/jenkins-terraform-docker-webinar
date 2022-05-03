@@ -42,7 +42,7 @@ pipeline {
 	}
 	stage('Test the website') {
 		steps {
-			test_web(${ports},serverIP)
+			test_web(ports,serverIP)
 		}
 	}
     }
