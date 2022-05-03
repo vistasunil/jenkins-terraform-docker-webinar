@@ -8,7 +8,6 @@ pipeline {
     	string(name: 'serverIP', defaultValue: 'None', description: 'Enter target Host IP ')
 	string(name: 'targetHost', defaultValue: 'None', description: 'Enter target host for deployment ')
 	string(name: 'dockerUser', defaultValue: 'None', description: 'Enter Docker user name ')
-	password(name: 'dockerPass', description: 'Enter docker login password ')	    
     }
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
