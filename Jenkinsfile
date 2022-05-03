@@ -48,7 +48,6 @@ pipeline {
     }
 }
 
-@NonCPS // has to be NonCPS or the build breaks on the call to .each
 def test_web(port,serverIP) {
     for (int i = 0; i < list.size(); i++) {
         sh 'curl -I "http://${serverIP}:${port[i]}"'
