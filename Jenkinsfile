@@ -37,5 +37,10 @@ pipeline {
 			sh 'ansible-playbook docker.yaml -e "hostname=${targetHost}"'
 		}
 	}
+	stage('Test the website') {
+		steps {
+			sh 'curl http://${targetHost}:81/devopsIQ"'
+		}
+	}
     }
 }
