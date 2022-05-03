@@ -1,3 +1,4 @@
+ports = [ 81, 82, 83, 84, 85 ]
 pipeline {
     agent {
         node {
@@ -41,10 +42,15 @@ pipeline {
 	}
 	stage('Test the website') {
 		steps {
-			for (port in [ 81, 82, 83, 84, 85 ]) {
-        			sh 'curl "http://${serverIP}:$port"'
-			}
+			test_web(ports,serverIP)
 		}
 	}
+    }
+}
+
+@NonCPS // has to be NonCPS or the build breaks on the call to .each
+def test_web(list,serverIP) {
+    list.each { item ->
+        curl "http://${serverIP}:$port"
     }
 }
