@@ -51,6 +51,6 @@ pipeline {
 @NonCPS // has to be NonCPS or the build breaks on the call to .each
 def test_web(list,serverIP) {
     list.each { item ->
-	    curl "http://${serverIP}:${item}"
+	    sh curl -I "http://${serverIP}:${item}"
     }
 }
