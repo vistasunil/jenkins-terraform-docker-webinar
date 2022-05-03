@@ -42,7 +42,12 @@ pipeline {
 	}
 	stage('Test the website') {
 		steps {
-			test_web(ports,serverIP)
+			script{
+				ports.each{port->
+					sh 'curl -I "http://${serverIP}:$port"'
+				}
+			}
+			test_web(${ports},serverIP)
 		}
 	}
     }
