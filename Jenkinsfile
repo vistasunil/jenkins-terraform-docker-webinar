@@ -19,23 +19,23 @@ pipeline {
 			git "https://github.com/vistasunil/jenkins-cicd-webinar.git"
             	}
 	}
-	stage('Remove dockers'){
+	stage('Remove old containers'){
 		steps {
 			sh "if [ `sudo docker ps -a -q|wc -l` -gt 0 ]; then sudo docker rm -f \$(sudo docker ps -a -q);fi"
 		}
 	}
-	stage('Build'){
+	stage('Build deployment image'){
 		steps {
 			sh "sudo docker build /home/ubuntu/jenkins/workspace/${JOB_NAME} -t ${dockerUser}/devopsdemo"
 		}
 	}
-	stage('Docker Push'){
+	stage('Push Image'){
 		steps {
 			sh "echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login --username ${dockerUser} --password-stdin"
 			sh "sudo docker push ${dockerUser}/devopsdemo:latest"
 		}
 	}
-	stage('Configure servers with Docker and deploy website') {
+	stage('Deploy website on containers') {
 		steps {
 			sh 'ansible-playbook docker.yaml -e "hostname=${targetHost}"'
 		}
