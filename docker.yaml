@@ -42,6 +42,9 @@
         name: "{{ default_container_name }}{{ item }}"
         state: absent
       with_sequence: count={{ create_containers }}
+      
+    - name: Wait for cleanup
+      shell: sleep 30 
 
     # Creates the number of containers defined by the variable create_containers, using values from vars file
     - name: Create default containers
