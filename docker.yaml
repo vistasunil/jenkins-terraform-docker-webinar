@@ -36,6 +36,13 @@
         name: "{{ default_container_image }}"
         source: pull
 
+    # delete the old version containers
+    - name: Delete old containers
+      docker_container:
+        name: "{{ default_container_name }}{{ item }}"
+        state: absent
+      with_sequence: count={{ create_containers }}
+
     # Creates the number of containers defined by the variable create_containers, using values from vars file
     - name: Create default containers
       docker_container:
