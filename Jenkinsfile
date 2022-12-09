@@ -10,6 +10,7 @@ pipeline {
     	string(name: 'serverIP', defaultValue: 'None', description: 'Enter target Host IP ')
 	string(name: 'targetHost', defaultValue: 'None', description: 'Enter target host for deployment ')
 	string(name: 'dockerUser', defaultValue: 'None', description: 'Enter Docker user name ')
+	string(name: 'ansibleConfigPath', defaultValue: 'None', description: 'Enter Ansible config location ')    
     }
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
