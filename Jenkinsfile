@@ -9,8 +9,7 @@ pipeline {
     parameters {
     	string(name: 'serverIP', defaultValue: 'None', description: 'Enter target Host IP ')
 	string(name: 'targetHost', defaultValue: 'None', description: 'Enter target host for deployment ')
-	string(name: 'dockerUser', defaultValue: 'None', description: 'Enter Docker user name ')
-	string(name: 'ansibleConfigPath', defaultValue: 'None', description: 'Enter Ansible config location ')    
+	string(name: 'dockerUser', defaultValue: 'None', description: 'Enter Docker user name ')   
     }
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
@@ -39,7 +38,6 @@ pipeline {
 	}
 	stage('Deploy website on containers') {
 		steps {
-			env export ANSIBLE_CONFIG=${ansibleConfigPath}
 			sh  'ansible-playbook docker.yaml -e "hostname=${targetHost}"'
 		}
 	}
