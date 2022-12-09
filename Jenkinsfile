@@ -39,8 +39,10 @@ pipeline {
 	}
 	stage('Deploy website on containers') {
 		steps {
-			sh 'export ANSIBLE_CONFIG=${ansibleConfigPath}'
-			sh 'ansible-playbook docker.yaml -e "hostname=${targetHost}"'
+			sh '''
+			    export ANSIBLE_CONFIG=${ansibleConfigPath}
+			    ansible-playbook docker.yaml -e "hostname=${targetHost}"
+			   '''
 		}
 	}
 	stage('Test the website') {
