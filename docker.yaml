@@ -2,7 +2,7 @@
 - hosts: "{{hostname}}"
   become: true
   vars:
-    - create_containers: 5
+    - create_containers: 3
     - default_container_name: my_website
     - default_container_image: vistasunil/devopsdemo:latest
     - container_port: "8"
