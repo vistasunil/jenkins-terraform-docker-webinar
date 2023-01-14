@@ -1,4 +1,4 @@
-ports = [ 81, 82, 83, 84, 85 ]
+ports = [ 81, 82, 83]
 
 pipeline {
     agent {
