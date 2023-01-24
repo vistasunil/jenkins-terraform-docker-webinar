@@ -1,0 +1,30 @@
+---
+- hosts: "{{hostname}}"
+  become: true
+  vars:
+    - create_containers: 3
+    - default_container_name: my_website
+    - default_container_image: vistasunil/devopsdemo:latest
+    - container_port: "8"
+  tasks:
+    # delete the old version containers
+    - name: Delete old containers
+      docker_container:
+        name: "{{ default_container_name }}{{ item }}"
+        state: absent
+      with_sequence: count={{ create_containers }}
+      
+    - name: Wait for cleanup
+      shell: sleep 30 
+
+    # Creates the number of containers defined by the variable create_containers, using values from vars file
+    - name: Create default containers
+      docker_container:
+        name: "{{ default_container_name }}{{ item }}"
+        image: "{{ default_container_image }}"
+        state: started
+        exposed:
+         - "{{ container_port }}{{ item }}"
+        ports:
+         - "{{ container_port }}{{ item }}:80"
+      with_sequence: count={{ create_containers }}
