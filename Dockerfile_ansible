@@ -1,0 +1,17 @@
+From ubuntu
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt update -y && \
+    apt install software-properties-common -y && \
+    add-apt-repository --yes --update ppa:ansible/ansible && \
+    apt install ansible iputils-ping curl vim git -y
+
+RUN useradd ubuntu
+RUN mkdir -p /home/ubuntu/.ssh
+ADD ssh/id_rsa /home/ubuntu/.ssh
+RUN chown -R ubuntu:ubuntu /home/ubuntu
+
+RUN chmod 400 /home/ubuntu/.ssh/id_rsa
+RUN echo 34.125.9.128 slave1 >> /etc/hosts
+RUN echo 34.125.9.128 >> /etc/ansible/hosts
+RUN ssh-keyscan 34.125.9.128 >> /home/ubuntu/.ssh/known_hosts
+USER ubuntu
