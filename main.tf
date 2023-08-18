@@ -14,7 +14,7 @@ provider "docker" {
 resource "docker_image" "webapp" {
   name         = "cloudtrain:latest"
   build {
-    path = "${path.cwd}/devopsIQ"
+    path = "${path.cwd}"
     no_cache = "true"
   }
   triggers = {
