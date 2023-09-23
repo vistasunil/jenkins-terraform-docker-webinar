@@ -35,6 +35,7 @@
       docker_image:
         name: "{{ default_container_image }}"
         source: pull
+        force_source: yes
 
     # delete the old version containers
     - name: Delete old containers
