@@ -27,7 +27,7 @@ pipeline {
 	}
 	stage('Build deployment image'){
 		steps {
-			sh "sudo docker build /home/ubuntu/jenkins/workspace/${JOB_NAME} -t ${dockerUser}/devopsdemo"
+			sh "sudo docker build /home/ubuntu/jenkins/workspace/${JOB_NAME} -t ${dockerUser}/devopsdemo --no-cache"
 		}
 	}
 	stage('Push Image'){
