@@ -34,6 +34,7 @@ pipeline {
 	stage('Delete old and Deploy new version on website') {
 		steps {
 			sh  '''
+                           sudo docker rm -f $(sudo docker ps -aq)
                            sudo docker run -tid -p 81:80 ${dockerUser}/devopsdemo:latest
 			   sudo docker run -tid -p 82:80 ${dockerUser}/devopsdemo:latest
       			   sudo docker run -tid -p 83:80 ${dockerUser}/devopsdemo:latest
