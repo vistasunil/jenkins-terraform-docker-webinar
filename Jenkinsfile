@@ -15,7 +15,11 @@ pipeline {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
     }
     stages {
-
+        stage('SCM checkout'){
+        	steps {
+			git "https://github.com/vistasunil/jenkins-cicd-webinar.git"
+            	}
+	}
 	stage('Build deployment image'){
 		steps {
 			sh "sudo docker build /home/ubuntu/jenkins/workspace/${JOB_NAME} -t ${dockerUser}/devopsdemo --no-cache"
