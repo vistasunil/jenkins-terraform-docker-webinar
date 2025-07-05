@@ -25,7 +25,7 @@ pipeline {
 			sh """
    				sudo apt update -y 
        				sudo apt install docker.io -y
-	    		"
+	    		"""
             	}
 	}
 	stage('Build deployment image'){
