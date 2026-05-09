@@ -1,11 +1,7 @@
 ports = [ 81, 82, 83]
 
 pipeline {
-    agent {
-        node {
-            label 'slave2'
-        }
-    }
+    agent any
     parameters {
     	string(name: 'serverIP', defaultValue: 'None', description: 'Enter target Host IP ')
 		string(name: 'dockerUser', defaultValue: 'None', description: 'Enter Docker user name ')   
