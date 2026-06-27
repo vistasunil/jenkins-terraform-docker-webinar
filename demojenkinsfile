@@ -17,21 +17,21 @@ pipeline {
 		}
 		stage('Build deployment image'){
 			steps {
-				sh "docker build /opt/local/var/lib/jenkins/.jenkins/workspace/${JOB_NAME} -t ${dockerUser}/devopsdemo --no-cache"
+				sh "sudo docker build /opt/local/var/lib/jenkins/.jenkins/workspace/${JOB_NAME} -t ${dockerUser}/devopsdemo --no-cache"
 			}
 		}
 		stage('Push Image'){
 			steps {
-				sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login --username ${dockerUser} --password-stdin"
-				sh "docker push ${dockerUser}/devopsdemo:latest"
+				sh "echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login --username ${dockerUser} --password-stdin"
+				sh "sudo docker push ${dockerUser}/devopsdemo:latest"
 			}
 		}
 		stage('Deploy containerized website') {
 			steps {
 				sh  '''
-	          docker run -tid -p 81:80 ${dockerUser}/devopsdemo:latest
-				    docker run -tid -p 82:80 ${dockerUser}/devopsdemo:latest
-	      		docker run -tid -p 83:80 ${dockerUser}/devopsdemo:latest
+	                sudo docker run -tid -p 81:80 ${dockerUser}/devopsdemo:latest
+				    sudo docker run -tid -p 82:80 ${dockerUser}/devopsdemo:latest
+	      		    sudo docker run -tid -p 83:80 ${dockerUser}/devopsdemo:latest
 		    '''
 			}
 		}
