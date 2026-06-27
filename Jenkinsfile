@@ -15,14 +15,14 @@ pipeline {
 				git "https://github.com/vistasunil/jenkins-cicd-webinar.git"
             }
 		}
-		stage('Install docker'){
-	        steps {
-				sh """
-	   				sudo apt update -y 
-	       				sudo apt install docker.io -y
-		    	"""
-	        }
-		}
+		//stage('Install docker'){
+	    //    steps {
+		//		sh """
+	   	//			sudo apt update -y 
+	    //   				sudo apt install docker.io -y
+		//    	"""
+	    //    }
+		//}
 		stage('Build deployment image'){
 			steps {
 				sh "sudo docker build /var/jenkins_home/workspace/${JOB_NAME} -t ${dockerUser}/devopsdemo --no-cache"
